@@ -30,6 +30,36 @@ module.exports = function (grunt) {
     // Project settings
     config: config,
 
+    'gh-pages': {
+      options: {
+        base: 'dist',
+        repo: 'https://github.com/masakura/appcache.git'
+      },
+      src: ['**']
+    },
+
+    appcache: {
+      options: {
+        // Task-specific options go here.
+        basePath: '<%= config.dist %>'
+      },
+        // Target-specific file lists and/or options go here.
+      all: {
+        dest: '<%= config.dist %>/sample.appcache',
+        cache: {
+          patterns: [
+            '<%= config.dist %>/images/*.png',
+            '<%= config.dist %>/scripts/*.js',
+            '<%= config.dist %>/styles/*.css',
+            '<%= config.dist %>/*.html',
+            '<%= config.dist %>/*.ico',
+            '<%= config.dist %>/*.png'
+          ]
+        },
+        network: '*'
+      }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
